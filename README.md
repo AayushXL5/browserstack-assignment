@@ -75,7 +75,7 @@ This runs the same thing on 5 browsers simultaneously:
 | Chrome | Samsung Galaxy S23 |
 | Safari | iPhone 15 |
 
-Results show up on the [BrowserStack Automate Dashboard](https://automate.browserstack.com/).
+Results show up on the [BrowserStack Automate Dashboard]([https://automate.browserstack.com/](https://automate.browserstack.com/projects/Default+Project/builds/ElPais+Opinion+Scraper/1?public_token=9a8f4fe2777cff960af2ab5e941248daefece70c18990ba212fa138552c96dec)).
 
 ## Tech stack
 
