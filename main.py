@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import json
 import os
 import sys
 import time
@@ -31,6 +32,9 @@ from translator import translate_titles
 from analyzer import find_repeated_words, print_repeated_words
 
 load_dotenv()
+
+# output directory for persisting results
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 
 
 def show_banner():
@@ -70,6 +74,37 @@ def display_translations(spanish, english):
     for i, (es, en) in enumerate(zip(spanish, english), 1):
         print(f"\n  [{i}] {es}")
         print(f"      -> {en}")
+
+
+def save_results(articles, spanish_titles, english_titles, repeated):
+    """Save all results to JSON files in the output/ directory."""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # save scraped articles
+    articles_out = []
+    for a in articles:
+        articles_out.append({
+            "title": a["title"],
+            "url": a["url"],
+            "content": a["content"][:500],  # trim for readability
+            "image_path": a.get("image_path"),
+        })
+    with open(os.path.join(OUTPUT_DIR, "articles_data.json"), "w", encoding="utf-8") as f:
+        json.dump(articles_out, f, indent=2, ensure_ascii=False)
+    print(f"   [SAVED] output/articles_data.json")
+
+    # save translations
+    translations = []
+    for es, en in zip(spanish_titles, english_titles):
+        translations.append({"original": es, "translated": en})
+    with open(os.path.join(OUTPUT_DIR, "translated_headers.json"), "w", encoding="utf-8") as f:
+        json.dump(translations, f, indent=2, ensure_ascii=False)
+    print(f"   [SAVED] output/translated_headers.json")
+
+    # save word analysis
+    with open(os.path.join(OUTPUT_DIR, "word_analysis.json"), "w", encoding="utf-8") as f:
+        json.dump(repeated, f, indent=2, ensure_ascii=False)
+    print(f"   [SAVED] output/word_analysis.json")
 
 
 def run_local():
@@ -115,6 +150,12 @@ def run_local():
         print("=" * 60)
         repeated = find_repeated_words(english_titles)
         print_repeated_words(repeated)
+
+        # step 4: save everything to output/ folder
+        print("\n" + "=" * 60)
+        print("  STEP 4: Saving results to output/ folder")
+        print("=" * 60)
+        save_results(articles, spanish_titles, english_titles, repeated)
 
         elapsed = time.time() - t0
         print(f"\nDone! Took {elapsed:.1f} seconds")

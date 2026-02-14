@@ -1,5 +1,5 @@
+# environment
 .env
-images/
 __pycache__/
 *.pyc
 *.pyo
@@ -8,3 +8,15 @@ venv/
 *.egg-info/
 dist/
 build/
+
+# presentation (separate project)
+presentation.html
+build_presentation.py
+Notion_SaaS_Presentation.pptx
+~$Notion_SaaS_Presentation.pptx
+notion-logo.png
+notion-logo.svg
+
+# IDE
+.vscode/
+.idea/
