@@ -125,10 +125,10 @@ Checks that all output files exist, JSON is valid, articles have required fields
 
 ## Tech Stack
 
-- **Selenium 4** — browser automation (auto-manages ChromeDriver)
-- **RapidAPI Google Translate** — Spanish → English translation
-- **BrowserStack Automate** — cloud cross-browser testing
-- **Python threading** — parallel execution via `ThreadPoolExecutor`
+- **Selenium 4**: browser automation (auto-manages ChromeDriver)
+- **RapidAPI Google Translate**: Spanish → English translation
+- **BrowserStack Automate**: cloud cross-browser testing
+- **Python threading**: parallel execution via `ThreadPoolExecutor`
 
 ## Design Decisions
 
@@ -141,9 +141,9 @@ Checks that all output files exist, JSON is valid, articles have required fields
 ## Notes
 
 - Some opinion articles are paywalled or text-only (no image). Both cases are handled gracefully
-- The word analysis may return empty results if no words appear more than twice — this is correct behavior
+- The word analysis may return empty results if no words appear more than twice, and that is correct behavior
 - BrowserStack credentials use environment variables for security
 
 ## Author
 
-Aayush Gupta — [LinkedIn](https://www.linkedin.com/in/aayush02/) · [GitHub](https://github.com/AayushXL5)
+Aayush Gupta · [LinkedIn](https://www.linkedin.com/in/aayush02/) · [GitHub](https://github.com/AayushXL5)
